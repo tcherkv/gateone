@@ -23,3 +23,6 @@ Instraction to embed gateone will be available at https://servername:2002
 
 GateOne server will be available at https://servername:2000
 
+More documentation on GateOne server http://liftoff.github.io/GateOne/
+Original GateOne server source https://github.com/liftoff/GateOne
+

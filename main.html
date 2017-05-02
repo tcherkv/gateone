@@ -19,33 +19,14 @@
 
 <div class="slides container">
 <h2>GateOne Development Page</h2>
-<section class="slide row" title="Double click on the section to show slideshow" style="cursor: pointer;">
-<h4 class="s_title">SSH Terminal</h4>
 
-
-
-<div class="panel panel-default" style="width: 8em; margin: 10px;position: fixed; top: 1em; right: 1em;">
-  <div class="panel-heading" style="height: 35px; padding: 5px">
-      <div class="tabs">
-      </div>
-    <div class="list-inline panel-actions" style="margin:2px; text-align: right;">
-        <span><a href="#" id="resize-terminal" role="button" title="Resize"><i class="glyphicon glyphicon-resize-full" style="font-size: 14px;"></i></a></span>
-        <span class="dropdown  pull-right">
-            <span data-toggle="dropdown" class="dropdown-toggle"><i class="glyphicon glyphicon-option-vertical" style="font-size: 14px;"></i></span>
-            <ul class="dropdown-menu">
-                <li><a href="#">Control</a></li>
-                <li><a href="#">Storage</a></li>
-                <li><a href="#">Compute</a></li>
-            </ul>
-        </span>
-    </div>
-
-  </div>
-  <div class="panel-body" id="gateone_container" style="position: relative; width: 100%; height: 5em; padding: 0; background-image: url('/static/img/terminal_icon.png'); background-size: cover;">
+<div class="panel panel-default" style="margin: 10px;position: fixed; top: 1em; right: 2em;">
+  <div class="panel-body" id="gateone_container" style="position: relative; width: 100px; height: 100px; padding: 0; background-image: url('connect.png'); background-size: cover;">
             <div id="gateone"><div id="go_default_overlay" class="✈overlay"></div></div>
   </div>
 </div>
-</section>
+
+<h1>Below is just sample content</h1>
 
 <section class="slide row" title="Double click on the section to show slideshow" style="cursor: pointer;">
 <h4 class="s_title">Centos installation</h4>
@@ -144,7 +125,8 @@ var config = {
             address: '10.191.231.101',
             url: 'ssh://root@10.191.231.101:22/?identities=cloud_deploy_id_rsa',
             identities: ['cloud_deploy_id_rsa'],
-            username: 'root'
+            username: 'root',
+            cloud_deploy_id_rsa: 3
         },
         {
             type: 'http',
@@ -152,6 +134,24 @@ var config = {
             url: 'http://10.191.231.101',
         }
     ]
+};
+
+function get_identity_key(id) {
+    return '-----BEGIN RSA PRIVATE KEY-----' +
+'MIICWwIBAAKBgQCH0/mpRX3y3uxia6QABr+fS83K9CY9C1z3gn6+pI/SOJOxMi+h' +
+'5tzKo9BMXw7ePevh2UJ47f2YaMjZV8/Kg120UWku3PJUBJme4Tmm1oQUEmwgCVMT' +
+'pk0ErFKbwFYBxHeL6yThQxSIkN1Lby6wkzxI+WpGWACSf7KfFn1HPejZ5wIDAQAB' +
+'AoGALNh6B79f9D5SAbTUcwXHYsreaXHu5hzIVxgIzNz8d0YizVBqlaPppiYr8es4' +
+'t3vuU6Ut40uAfT+rgMcTXiO9Xf5zcPAbjMLVktA2XD51OCc64GXEjW9QlZCz9P+a' +
+'f45YWPcDEhUHsF5a7ccokAYMP2b8V6UNc3ZodLxyO0wxDcECQQDDvg7nplf+gs5t' +
+'HiGdcUaAcGIkTSl5+sntHJ042emdGCvOmqPyTz2SSlJ4d7jwDVq5hmgLWqaUcbtc' +
+'rErQETNxAkEAsaQ5BYwA9vEBpkfnsd/sHNgKRKdq96YyHmKr+jplC6pYVZCvsmEj' +
+'dF9K/8X0gb7foq6rJi8t3ei2DCARV2IG1wJASLcgHlojMj8xpEOfRTfBcxFMxCOO' +
+'FuxdeyI4HdiF+n/yNiwoX2mke+X0QSBoqXSskWMm36DrZRXi/ohaunTJYQJAC6DW' +
+'YriRb5jDJOFcF1azHAhAU9IpvGBSs45993lPF/5kneVEuwaEzZ9XR3rr0HpwJTQN' +
+'3AgGlpofIJgQyomOLQJAfhqzBF38aCs6zEZa+j77wBwivwm4pny1644cgNp3Us2c' +
+'RuJdS9+bR+SFfFWEoNqnrdMimvRvg9XSWTfKsuRN/w==' +
+'-----END RSA PRIVATE KEY-----'
 };
 
 var init = function() {
