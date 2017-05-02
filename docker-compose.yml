@@ -1,0 +1,8 @@
+web:
+ build: .
+ ports:
+  - "2000:8000"
+  - "2002:2443"
+ volumes:
+  - "./main.html:/gateone/GateOne/gateone/tests/hello_embedded/static/main.html:rw"
+ command: /startup.sh
