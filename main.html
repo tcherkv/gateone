@@ -1,184 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <title>Embedding Gate One - Simple</title>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="site.css" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="gateone.js" type="text/javascript"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        <script src="site.js" type="text/javascript"></script>
+    </head>
 
-<!-- A simple example of embeding Gate One -->
-<head>
+    <body>
+        <div id="tabContainer" style="width:800px; margin-left:20px; margin-top:20px; margin-right:40px; background-color:#f1f1f1; display:none">
+            <table style="float:right; width:60px; height:30px;">
+                <tr>
+                    <td width="50%">
+                        <img id="btMinimize" src="minimize.png" height="20" style="cursor:pointer" />
+                    </td>
+                    <td width="50%" style="text-align:center">
+                        <img id="btMenuMin" src="menu.png" height="20" style="cursor:pointer" />
+                    </td>
+                </tr>
+            </table>
 
-    <title>Embedding Gate One - Simple</title>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+            <div style="float:left">
+                <ul id="tabs" class="tabs"></ul>
+            </div>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+            <div id="tabs_content" style="position:relative; top:30px">
 
-    <script src="gateone.js" type="text/javascript"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+            </div>
 
-</head>
+            <div id="gateone_container" style="position:relative; top:0; width:800px; height:600px; padding:0; display:none">
+                <div id="gateone"></div>
+            </div>
+        </div>
 
-<body>
-
-<div class="slides container">
-<h2>GateOne Development Page</h2>
-
-<div class="panel panel-default" style="margin: 10px;position: fixed; top: 1em; right: 2em;">
-  <div class="panel-body" id="gateone_container" style="position: relative; width: 100px; height: 100px; padding: 0; background-image: url('connect.png'); background-size: cover;">
-            <div id="gateone"><div id="go_default_overlay" class="✈overlay"></div></div>
-  </div>
-</div>
-
-<h1>Below is just sample content</h1>
-
-<section class="slide row" title="Double click on the section to show slideshow" style="cursor: pointer;">
-<h4 class="s_title">Centos installation</h4>
-<p>Install Centos on the machine from&nbsp;<b>CentOS-7-x86_64-DVD.iso</b>&nbsp;image. The installation is straight forward. Make sure to disable SELinux and set a power user and root user passwords.</p>
-
-<p>Afte rebooting the VM, set an appropriate hostname before starting OpenStack RDO installation.</p>
-
-<p>As an example:</p>
-
-<p>&nbsp;</p>
-
-<pre><code data-trim="">echo "192.168.0.126 rdo-newton rdo-newton.localdomain" &gt;&gt; /etc/hosts
-hostnamectl set-hostname rdo-newton
-</code></pre>
-
-<p>&nbsp;</p>
-
-<p><i><b>Snapshot time:</b>&nbsp;Just in case the installation of OpenStack goes wrong it is a good idea to take a snapshot of the just installed OS ex: "just installed centos"</i></p>
-
-</section>
-<section class="slide row" title="Double click on the section to show slideshow" style="cursor: pointer;">
-<h4 class="s_title">Centos installation</h4>
-<p>Install Centos on the machine from&nbsp;<b>CentOS-7-x86_64-DVD.iso</b>&nbsp;image. The installation is straight forward. Make sure to disable SELinux and set a $
-
-<p>Afte rebooting the VM, set an appropriate hostname before starting OpenStack RDO installation.</p>
-
-<p>As an example:</p>
-
-<p>&nbsp;</p>
-
-<pre><code data-trim="">echo "192.168.0.126 rdo-newton rdo-newton.localdomain" &gt;&gt; /etc/hosts
-hostnamectl set-hostname rdo-newton
-</code></pre>
-
-<p>&nbsp;</p>
-
-<p><i><b>Snapshot time:</b>&nbsp;Just in case the installation of OpenStack goes wrong it is a good idea to take a snapshot of the just installed OS ex: "just inst$
-
-</section>
-<section class="slide row" title="Double click on the section to show slideshow" style="cursor: pointer;">
-<h4 class="s_title">Centos installation</h4>
-<p>Install Centos on the machine from&nbsp;<b>CentOS-7-x86_64-DVD.iso</b>&nbsp;image. The installation is straight forward. Make sure to disable SELinux and set a $
-
-<p>Afte rebooting the VM, set an appropriate hostname before starting OpenStack RDO installation.</p>
-
-<p>As an example:</p>
-
-<p>&nbsp;</p>
-
-<pre><code data-trim="">echo "192.168.0.126 rdo-newton rdo-newton.localdomain" &gt;&gt; /etc/hosts
-hostnamectl set-hostname rdo-newton
-</code></pre>
-
-<p>&nbsp;</p>
-
-<p><i><b>Snapshot time:</b>&nbsp;Just in case the installation of OpenStack goes wrong it is a good idea to take a snapshot of the just installed OS ex: "just inst$
-
-</section>
-<section class="slide row" title="Double click on the section to show slideshow" style="cursor: pointer;">
-<h4 class="s_title">Centos installation</h4>
-<p>Install Centos on the machine from&nbsp;<b>CentOS-7-x86_64-DVD.iso</b>&nbsp;image. The installation is straight forward. Make sure to disable SELinux and set a $
-
-<p>Afte rebooting the VM, set an appropriate hostname before starting OpenStack RDO installation.</p>
-
-<p>As an example:</p>
-
-<p>&nbsp;</p>
-
-<pre><code data-trim="">echo "192.168.0.126 rdo-newton rdo-newton.localdomain" &gt;&gt; /etc/hosts
-hostnamectl set-hostname rdo-newton
-</code></pre>
-
-<p>&nbsp;</p>
-
-<p><i><b>Snapshot time:</b>&nbsp;Just in case the installation of OpenStack goes wrong it is a good idea to take a snapshot of the just installed OS ex: "just inst$
-
-</section>
-
-</div>
-
-<script>
-var config = {
-    url: '',
-    auth: {
-        'upn': 'test@example.com',
-        'signature_method': 'HMAC-SHA1',
-        'timestamp': '1493697342375',
-        'signature': 'f4e55b3f9479d7d528219ecf14a1ea37213fc43d',
-        'api_key': 'MWM2OTM0ZTk4NTU2NDQ5MWIxMzJjYmU2NzQzN2E0MGNlY',
-        'api_version': '1.0'
-    },
-    connections: [
-        {
-            type: 'ssh',
-            name: 'server1',
-            address: '10.191.231.101',
-            url: 'ssh://root@10.191.231.101:22/?identities=cloud_deploy_id_rsa',
-            identities: ['cloud_deploy_id_rsa'],
-            username: 'root',
-            cloud_deploy_id_rsa: 3
-        },
-        {
-            type: 'http',
-            name: 'server1',
-            url: 'http://10.191.231.101',
-        }
-    ]
-};
-
-function get_identity_key(id) {
-    return '-----BEGIN RSA PRIVATE KEY-----' +
-'MIICXAIBAAKBgQCBwsgKzlDWd6vMUG+BkHM+5C1fdqdC6ZJw5bwKfi8kDA35feVY' +
-'K8SeRBf4E7zuDojDFSK5aaMm7g5ICWQD5rqQtk6ZwVTFBBOmpiC/GUfupDwfO5GV' +
-'jSzgVH6c2OA4Ou0gceE9P9Y8O6qvx3VodNq6xMukj0qijqSCRKpR4idL4wIDAQAB' +
-'AoGAMuGP0zznUdGHGgyITMO5jPWoHQDHwWMZOw+6Vlr4XSgk6qnFHne7F1wYEfyb' +
-'XrVwRx6oiQ+1G/TIwNJ911HH4ZVG/mIqsdX4PP64gj9WHuv2WUJi6ukvzNlya/os' +
-'LwtZ7i5Mf55xnzd2byGLeRkz4JZXlmKGHi+H+EjIUu1xkTECQQD2OzBp2LMSD7D/' +
-'nljypsG1G92D1ygrbfsu/YBhN+Qg7u/xxBa3yj+BcaF4E+8PmZCKnw2dKDryWaTl' +
-'OPVvUo1HAkEAhuitsEEJO2nra4UopdveRj1kmMjwUcyzrvILbTxeoDqz1dvcfEeK' +
-'6YuS9mU2pPDk80ON8G+VCkUWtLC9zFfqhQJAJWy/ogbeyMr7ww5lRJRV8toGZCiK' +
-'oXc46156acxd7yeB7sQ4E704w8rqmN6mwj87+eXM4usfcoBvkKuEmmP4twJAXycd' +
-'2oMEj/NVKLDyyokZbVE/8sNHPWq0EWCGzrUVyM2eqeg4yy9quu7G6SLaN9vwn+O1' +
-'6S/KX0P7j9ZZCBe6QQJBAKCz8M9epVtX6zESZCK8PV2HfWjiFcU7EIM8JzGBrH+X' +
-'9EaTtXHMcqMWRw6mxUR/CX9m4TPoDgKMpGMvABm8iNU=' +
-'-----END RSA PRIVATE KEY-----'
-};
-
-// -----BEGIN PUBLIC KEY-----
-// MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCBwsgKzlDWd6vMUG+BkHM+5C1f
-// dqdC6ZJw5bwKfi8kDA35feVYK8SeRBf4E7zuDojDFSK5aaMm7g5ICWQD5rqQtk6Z
-// wVTFBBOmpiC/GUfupDwfO5GVjSzgVH6c2OA4Ou0gceE9P9Y8O6qvx3VodNq6xMuk
-// j0qijqSCRKpR4idL4wIDAQAB
-// -----END PUBLIC KEY-----
-
-var init = function() {
-    // Initialize Gate One:
-    GateOne.init({
-        url:config.url,
-        embedded:true,
-        disableTermTransitions:true,
-        terminalFontSize: '80%',
-        columns: 160,
-        showTitle:false,
-        showToolbar:false,
-        fillContainer:true,
-        colors:'gnome-terminal',
-        auth: config.auth,
-        // autoConnectURL:'ssh://root@10.191.231.101:22/?identities=cloud_deploy_id_rsa'
-    });
-    console.log('test')
-}
-</script>
-</body>
-
+        <div id="btMenu" style="position:absolute; top:20px; left: 20px; width:60px; height:60px; background-image:url(connect.png); background-size:contain; cursor:pointer"></div>
+        <div id="menu" style="display:none">
+            <ul></ul>
+        </div>
+    </body>
 </html>

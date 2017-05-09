@@ -1,0 +1,70 @@
+
+ul.tabs {
+    overflow: hidden;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+ul.tabs li {
+    float: left;
+    position: relative;
+    padding-left: 10px;
+    padding-right: 10px;
+    line-height: 30px;
+    background-color: #a3a3a3;
+    margin: 0;
+    font-weight: bold;
+    cursor: pointer;
+    text-align: center;
+}
+
+ul.tabs li:hover {
+    background-color: #eaedee;
+}
+
+ul.tabs li:focus {
+    outline: 0;
+    background-color: #eaedee;
+}
+
+ul.tabs li.current-tab {
+    background-color: #c4c7c8;
+}
+
+#tabs_content div {
+    position: relative;
+    left: 0;
+    background-color: #c4c7c8;
+    width: 800px;
+    height: 600px;
+}
+
+#menu {
+    position: absolute;
+    top: 40px;
+    background-color: #e6e9ea;
+    width: 140px;
+}
+
+#menu ul {
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    width: 100%;
+}
+
+#menu li {
+    border-left-width: 30px;
+    border-left-style: solid;
+    border-left-color: #d8dbdc;
+    padding: 5px;
+    cursor: pointer;
+}
+
+#menu li:hover {
+    background-color: #f1f1f1;
+    border-left-color: #f1f1f1;
+}
