@@ -44,6 +44,7 @@
 
         <script>
             var config = {
+                // url: 'https://192.168.2.140:2000',
                 url: 'https://localhost:2000',
                 auth: {
                     'upn': 'test@example.com',
@@ -57,11 +58,11 @@
                     {
                         type: 'ssh',
                         name: 'control',
-                        address: '10.191.231.101',
-                        url: 'ssh://root@10.191.231.101:22/?identities=cloud_deploy_id_rsa',
-                        identities: ['cloud_deploy_id_rsa'],
-                        username: 'root',
-                        cloud_deploy_id_rsa: 3
+                        address: '40.122.41.238',
+                        url: 'ssh://tcherkv@40.122.41.238/?identities=id_rsa',
+                        identities: ['id_rsa'],
+                        username: 'tcherkv',
+                        id_rsa: 3
                     },
                     {
                         type: 'ssh',

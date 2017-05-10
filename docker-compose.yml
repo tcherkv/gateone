@@ -5,4 +5,6 @@ web:
   - "2002:2443"
  volumes:
   - "./main.html:/gateone/GateOne/gateone/tests/hello_embedded/static/main.html:rw"
+  - "./site.css:/gateone/GateOne/gateone/tests/hello_embedded/static/site.css:rw"
+  - "./site.js:/gateone/GateOne/gateone/tests/hello_embedded/static/site.js:rw"
  command: /startup.sh
