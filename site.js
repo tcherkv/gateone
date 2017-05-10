@@ -1,38 +1,5 @@
 
-var config = {
-    url: 'https://localhost:2000',
-    auth: {
-        'upn': 'test@example.com',
-        'signature_method': 'HMAC-SHA1',
-        'timestamp': '1514757600000',//'1493697342375',
-        'signature': 'c5bfb0a3d7dd53df1ddb6aed7e5824239c4c4732', //'f4e55b3f9479d7d528219ecf14a1ea37213fc43d',
-        'api_key': 'MWM2OTM0ZTk4NTU2NDQ5MWIxMzJjYmU2NzQzN2E0MGNlY',
-        'api_version': '1.0'
-    },
-    connections: [
-        {
-            type: 'ssh',
-            name: 'control',
-            address: '10.191.231.101',
-            url: 'ssh://root@10.191.231.101:22/?identities=cloud_deploy_id_rsa',
-            identities: ['cloud_deploy_id_rsa'],
-            username: 'root',
-            cloud_deploy_id_rsa: 3
-        },
-        {
-            type: 'http',
-            name: 'storage',
-            url: 'http://10.191.231.101'
-        },
-        {
-            type: 'http',
-            name: 'compute',
-            url: 'http://localhost'
-        }
-    ]
-};
-
-$(window).load(function()
+$(document).ready(function()
 {
     for(var i = 0; i < config.connections.length; i++)
     {
@@ -40,18 +7,23 @@ $(window).load(function()
         var $item = $('<li data-id="' + i + '">' + name + '</li>')
         $('#menu ul').append($item);
 
+        if(config.connections[i].type == 'ssh')
+            AddTab(i, name);
+
         $item.click(function()
         {
-            $('#btMenu').hide();
+            var index = $(this).data('id');
+
+            if(config.connections[index].type == 'ssh')
+            {
+                $('#tabContainer').show();
+                $('#btMenu').hide();
+            }
+
             $('#menu').hide();
 
-            var index = $(this).data('id');
-            SelectTab(index);
-
-            $('#tabContainer').show();
+            SelectItem(index);
         });
-
-        AddTab(i, name);
     }
 
     $(document).click(function()
@@ -62,7 +34,7 @@ $(window).load(function()
     $('#tabs > li').click(function()
     {
         var index = $(this).data('id');
-        SelectTab(index);
+        SelectItem(index);
     });
 
     $('#btMenu').click(function(e)
@@ -83,12 +55,6 @@ $(window).load(function()
         $('#menu').hide();
         $('#btMenu').show();
     });
-
-    $(window).unload(function() {
-        GateOne.Terminal = null;
-    });
-
-    SelectTab(0);
 });
 
 function InitGateOne(callback, index)
@@ -104,7 +70,6 @@ function InitGateOne(callback, index)
         fillContainer: true,
         colors: 'gnome-terminal',
         auth: config.auth
-        // autoConnectURL:'ssh://root@10.191.231.101:22/?identities=cloud_deploy_id_rsa'
     });
 
     var timer = setInterval(function ()
@@ -123,18 +88,28 @@ function AddTab(index, title)
     var $li = $('<li data-id="' + index + '">' + title + '</li>');
     $('#tabs').append($li);
 
-    var $content = $('<div></div>');
+    var $content = $('<div data-id="' + index + '"></div>');
     $('#tabs_content').append($content);
 }
 
-function SelectTab(index)
+function SelectItem(index)
 {
-    var $li = $('#tabs > li:nth(' + index + ')');
+    var $li = $('#tabs > li[data-id=' + index + ']');
+    if($li.length == 0)
+    {
+        var win = window.open(config.connections[index].url, '_blank');
+        if (win)
+            win.focus();
+        else
+            alert('Please allow popups for this website');
+        return;
+    }
+
     $('.current-tab').removeClass('current-tab');
     $li.addClass('current-tab');
 
     $('#tabs_content > div').hide();
-    $('#tabs_content > div:nth(' + index + ')').show();
+    $('#tabs_content > div[data-id=' + index + ']').show();
 
     if(config.connections[index].type == 'ssh')
     {
@@ -191,8 +166,10 @@ function AddTerminal(termNum, connection)
 
     GateOne.Terminal.switchTerminal(termNum);
     GateOne.Terminal.clearScrollback(termNum);
-    GateOne.Terminal.Input.capture(); // (re)start capturing keyboard input
+    GateOne.ws.send(JSON.stringify({ 'terminal:ssh_save_known_hosts': get_identity_key() }));
     GateOne.Terminal.sendString(connection.url, termNum);
+
+    GateOne.Terminal.Input.capture(); // (re)start capturing keyboard input
 }
 
 function SelectTerminal(termNum)
@@ -206,7 +183,7 @@ function SelectTerminal(termNum)
     var go = GateOne,
         u = go.Utils,
         prefix = go.prefs.prefix,
-        terminals = u.getNodes(go.prefs.goDiv + termNum + ' .✈terminal');
+        terminals = u.getNodes(go.prefs.goDiv + ' .✈terminal');
 
     u.toArray(terminals).forEach(function(termNode)
     {

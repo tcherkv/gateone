@@ -5,21 +5,21 @@
         <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="site.css" />
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-        <script src="gateone.js" type="text/javascript"></script>
+        <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        <script src="gateone.js" type="text/javascript"></script>
         <script src="site.js" type="text/javascript"></script>
     </head>
 
     <body>
-        <div id="tabContainer" style="width:800px; margin-left:20px; margin-top:20px; margin-right:40px; background-color:#f1f1f1; display:none">
-            <table style="float:right; width:60px; height:30px;">
+        <div id="tabContainer">
+            <table>
                 <tr>
-                    <td width="50%">
-                        <img id="btMinimize" src="minimize.png" height="20" style="cursor:pointer" />
+                    <td>
+                        <img id="btMinimize" src="minimize.png" height="20" />
                     </td>
-                    <td width="50%" style="text-align:center">
-                        <img id="btMenuMin" src="menu.png" height="20" style="cursor:pointer" />
+                    <td>
+                        <img id="btMenuMin" src="menu.png" height="20" />
                     </td>
                 </tr>
             </table>
@@ -28,18 +28,60 @@
                 <ul id="tabs" class="tabs"></ul>
             </div>
 
-            <div id="tabs_content" style="position:relative; top:30px">
+            <div id="tabs_content">
 
             </div>
 
-            <div id="gateone_container" style="position:relative; top:0; width:800px; height:600px; padding:0; display:none">
+            <div id="gateone_container">
                 <div id="gateone"></div>
             </div>
         </div>
 
-        <div id="btMenu" style="position:absolute; top:20px; left: 20px; width:60px; height:60px; background-image:url(connect.png); background-size:contain; cursor:pointer"></div>
+        <div id="btMenu"></div>
         <div id="menu" style="display:none">
             <ul></ul>
         </div>
+
+        <script>
+            var config = {
+                url: 'https://localhost:2000',
+                auth: {
+                    'upn': 'test@example.com',
+                    'signature_method': 'HMAC-SHA1',
+                    'timestamp': '1514757600000',//'1493697342375',
+                    'signature': 'c5bfb0a3d7dd53df1ddb6aed7e5824239c4c4732', //'f4e55b3f9479d7d528219ecf14a1ea37213fc43d',
+                    'api_key': 'MWM2OTM0ZTk4NTU2NDQ5MWIxMzJjYmU2NzQzN2E0MGNlY',
+                    'api_version': '1.0'
+                },
+                connections: [
+                    {
+                        type: 'ssh',
+                        name: 'control',
+                        address: '10.191.231.101',
+                        url: 'ssh://root@10.191.231.101:22/?identities=cloud_deploy_id_rsa',
+                        identities: ['cloud_deploy_id_rsa'],
+                        username: 'root',
+                        cloud_deploy_id_rsa: 3
+                    },
+                    {
+                        type: 'ssh',
+                        name: 'test',
+                        address: '205.166.94.15',
+                        url: 'ssh://new@sdf.org',
+                        username: 'new'
+                    },
+                    {
+                        type: 'http',
+                        name: 'google',
+                        url: 'http://www.google.com'
+                    },
+                    {
+                        type: 'http',
+                        name: 'yahoo',
+                        url: 'http://www.yahoo.com'
+                    }
+                ]
+            };
+        </script>
     </body>
 </html>

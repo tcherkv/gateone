@@ -68,3 +68,53 @@ ul.tabs li.current-tab {
     background-color: #f1f1f1;
     border-left-color: #f1f1f1;
 }
+
+#tabContainer {
+    width: 800px;
+    margin-left: 20px;
+    margin-top: 20px;
+    margin-right: 40px;
+    margin-bottom: 40px;
+    background-color: #f1f1f1;
+    display: none;
+}
+
+#tabContainer table {
+    float: right;
+    width: 60px;
+    height: 30px;
+}
+
+#tabContainer td {
+    width: 50%;
+    text-align: center;
+}
+
+#tabContainer img {
+    cursor: pointer;
+}
+
+#tabs_content {
+    position: relative;
+    top: 30px;
+}
+
+#gateone_container {
+    position: relative;
+    top: 0;
+    width: 800px;
+    height: 600px;
+    padding: 0;
+    display: none;
+}
+
+#btMenu {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 60px;
+    height: 60px;
+    background-image: url(connect.png);
+    background-size: contain;
+    cursor: pointer;
+}

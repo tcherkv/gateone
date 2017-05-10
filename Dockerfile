@@ -10,7 +10,5 @@ COPY menu.png /gateone/GateOne/gateone/tests/hello_embedded/static/menu.png
 COPY minimize.png /gateone/GateOne/gateone/tests/hello_embedded/static/minimize.png
 COPY site.js /gateone/GateOne/gateone/tests/hello_embedded/static/site.js
 COPY site.css /gateone/GateOne/gateone/tests/hello_embedded/static/site.css
-COPY cloud_deploy_id_rsa /gateone/users/test@example.com/.ssh/cloud_deploy_id_rsa
-CMD chmod 600 /gateone/users/test@example.com/.ssh/cloud_deploy_id_rsa
 ADD startup.sh /
 CMD /startup.sh
