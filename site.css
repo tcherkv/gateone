@@ -1,38 +1,4 @@
 
-ul.tabs {
-    overflow: hidden;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-
-ul.tabs li {
-    float: left;
-    position: relative;
-    padding-left: 10px;
-    padding-right: 10px;
-    line-height: 30px;
-    background-color: #a3a3a3;
-    margin: 0;
-    font-weight: bold;
-    cursor: pointer;
-    text-align: center;
-}
-
-ul.tabs li:hover {
-    background-color: #eaedee;
-}
-
-ul.tabs li:focus {
-    outline: 0;
-    background-color: #eaedee;
-}
-
-ul.tabs li.current-tab {
-    background-color: #c4c7c8;
-}
-
 #tabs_content div {
     position: relative;
     left: 0;
@@ -71,6 +37,7 @@ ul.tabs li.current-tab {
 
 #tabContainer {
     width: 800px;
+    height: 640px;
     margin-left: 20px;
     margin-top: 20px;
     margin-right: 40px;
@@ -83,6 +50,7 @@ ul.tabs li.current-tab {
     float: right;
     width: 60px;
     height: 30px;
+    margin-top: 6px;
 }
 
 #tabContainer td {
@@ -96,7 +64,7 @@ ul.tabs li.current-tab {
 
 #tabs_content {
     position: relative;
-    top: 30px;
+    top: 42px;
 }
 
 #gateone_container {

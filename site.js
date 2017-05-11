@@ -21,7 +21,6 @@ $(document).ready(function()
             }
 
             $('#menu').hide();
-
             SelectItem(index);
         });
     }
@@ -85,10 +84,12 @@ function InitGateOne(callback, index)
 
 function AddTab(index, title)
 {
-    var $li = $('<li data-id="' + index + '">' + title + '</li>');
+    var $li = $('<li ' + (index == 0 ? 'class="active" ' : '') + 'data-id="' + index +
+        '"><a data-toggle="tab" href="#' + title + '">' + title + '</a></li>');
     $('#tabs').append($li);
 
-    var $content = $('<div data-id="' + index + '"></div>');
+    var $content = $('<div id="' + title + '" data-id="' + index +
+        '" class="tab-pane fade' + (index == 0 ? ' in active' : '') + '"></div>');
     $('#tabs_content').append($content);
 }
 
@@ -105,9 +106,7 @@ function SelectItem(index)
         return;
     }
 
-    $('.current-tab').removeClass('current-tab');
-    $li.addClass('current-tab');
-
+    $li.find('a').tab('show');
     $('#tabs_content > div').hide();
     $('#tabs_content > div[data-id=' + index + ']').show();
 
@@ -157,7 +156,9 @@ function AddTerminal(termNum, connection)
         gateone.appendChild(container);
     else
         container = existingContainer;
-    GateOne.Terminal.getOpenTerminals()
+
+    GateOne.Terminal.getOpenTerminals();
+
     // Tell Gate One to create the new terminal
     if (termNum)
         GateOne.Terminal.newTerminal(termNum, null, container);
@@ -167,23 +168,41 @@ function AddTerminal(termNum, connection)
     GateOne.Terminal.switchTerminal(termNum);
     GateOne.Terminal.clearScrollback(termNum);
 
-    GateOne.ws.send(JSON.stringify({ 'terminal:ssh_store_id_file':  {
-                        'name': 'cloud_deploy_id_rsa',
-                        'private': get_identity_key(),
-                    } }));
-    GateOne.ws.send(JSON.stringify({ 'terminal:ssh_store_id_file':  {
-                    'name': 'cloud_deploy_id_rsa',
-                    'public': get_identity_pub_key()
-                } }));
-    GateOne.Terminal.sendString(connection.url, termNum);
+    if(connection.identities != undefined)
+    {
+        GateOne.ws.send(JSON.stringify({
+            'terminal:ssh_store_id_file': {
+                'name': connection.identities[0],
+                'private': get_identity_key()
+            }
+        }));
 
+        GateOne.ws.send(JSON.stringify({
+            'terminal:ssh_store_id_file': {
+                'name': connection.identities[0],
+                'public': get_identity_pub_key()
+            }
+        }));
+
+        GateOne.ws.send(JSON.stringify({
+            'terminal:ssh_gen_new_keypair': {
+                'name': connection.identities[0],
+                'passphrase': 'testing_passphrase'
+            }
+        }));
+
+        GateOne.ws.send(JSON.stringify({'terminal:ssh_save_known_hosts': get_identity_pub_key()}));
+    }
+
+    GateOne.Terminal.sendString(connection.url, termNum);
     GateOne.Terminal.Input.capture(); // (re)start capturing keyboard input
 }
 
 function SelectTerminal(termNum)
 {
-    $('#gateone_container').appendTo($('#tabs_content > div:nth(' + termNum + ')')).show();
-    $('#tabs_content > div:nth(' + termNum + ')').show();
+    var $tab_content = $('#tabs_content > div[data-id=' + termNum + ']');
+    $('#gateone_container').appendTo($tab_content).show();
+    $tab_content.show();
 
     termNum += 1;
 
