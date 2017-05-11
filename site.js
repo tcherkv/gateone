@@ -173,28 +173,30 @@ function AddTerminal(termNum, connection)
         GateOne.ws.send(JSON.stringify({
             'terminal:ssh_store_id_file': {
                 'name': connection.identities[0],
-                'private': get_identity_key()
+                'private': get_identity_key(),
+                'public': get_identity_pub_key(),
+                'passphrase': ''
             }
         }));
 
-        GateOne.ws.send(JSON.stringify({
-            'terminal:ssh_store_id_file': {
-                'name': connection.identities[0],
-                'public': get_identity_pub_key()
-            }
-        }));
+        // GateOne.ws.send(JSON.stringify({
+        //     'terminal:ssh_store_id_file': {
+        //         'name': connection.identities[0],
+        //         'public': get_identity_pub_key()
+        //     }
+        // }));
 
-        GateOne.ws.send(JSON.stringify({
-            'terminal:ssh_gen_new_keypair': {
-                'name': connection.identities[0],
-                'passphrase': 'testing_passphrase'
-            }
-        }));
+        // GateOne.ws.send(JSON.stringify({
+        //     'terminal:ssh_gen_new_keypair': {
+        //         'name': connection.identities[0],
+        //         'passphrase': 'testing_passphrase'
+        //     }
+        // }));
 
-        GateOne.ws.send(JSON.stringify({'terminal:ssh_save_known_hosts': get_identity_pub_key()}));
+        // GateOne.ws.send(JSON.stringify({'terminal:ssh_save_known_hosts': get_identity_pub_key()}));
     }
 
-    GateOne.Terminal.sendString(connection.url, termNum);
+    GateOne.Terminal.sendString(connection.url + '\n', termNum);
     GateOne.Terminal.Input.capture(); // (re)start capturing keyboard input
 }
 
@@ -235,33 +237,33 @@ function SelectTerminal(termNum)
 }
 
 function get_identity_key(id) {
-    return '-----BEGIN RSA PRIVATE KEY-----' +
-'MIIEowIBAAKCAQEAzpPwCB6A+HXHTS0E83ujlcLf4Dlz0DTo53SsGkJCQ7BiMwxh' +
-'FHpuUN3yUFTEgtTXLN+pDK+WiFJgELKCKH0NDxFPnezDE0iwwDsszD+5KfT+mxPP' +
-'ZLHUZQ5OvJ5oGSlYmrFhjTLqhrZTR1aa0Ml8/PvWbvu4MUuSK9JWGoa4wV5Og5GE' +
-'Gy4U0ytP9MkDiDUOligAUA1QaHUyorUIG41x9Is7E4/1epFpETtwgi+4keZIBAI9' +
-'4Cojd7f7tJk8WpmR18wchng8qLZ1PHLhncK5DwrYLcsK7P5WfOwm7fhVJW0oRZM4' +
-'GaC8IHtUO79WphUYcQ5VGqDP1z+fURZNUNL+tQIDAQABAoIBABtZwO0CROcgiOux' +
-'6zblhsocTBHe6XOGndOPQf4UCbv2jXneyLeyYgq46A00u/PqhDa/wh0Y3mBcL7Xm' +
-'PI9pxyHYk+b/4vAZrrU04ICGa1ifxFn57HqThOCAXXJhsryqGb4ZgCX2uNBvMWV/' +
-'lO3Rz4ebPE/jaga0z7yXk6jdb3bCbdOXsj0iPfHAuTZMJaVg43Mgr3Xmm8ozKGD4' +
-'4Htd8oMsmX26lgI4kH1pLP/wZHhVZmW5CHphizijkAaioPmPOH1JKl6hLNZ8SPWx' +
-'Lc4i6CDoyXk2k/YRHcUjyPDt6F97b96xZNXnyHENKhshci1ES2Htmq/0VQBqzq/m' +
-'Cm5KrYECgYEA5pLj5bav0fX6+K3tta+weFEQBLczp+cSZ5KwL0HQhtttR1/lEszp' +
-'Gz689ffmPw2FpaNLGk12o+HMOboWLiJICjeUg7hEoU0OLiIcAqX+nE+ptcGqEEpk' +
-'NxGP1yBZVkAxVIupAe8q+/O3gf7BGjvVqmJxoGFro/FPqowAFNUuatUCgYEA5Vuk' +
-'RWpowEDNPYyfD18vRMB48VeWQJm6SGsO+5kkggiIaOESIA0GT1ttvPpq3D5Ag13A' +
-'moSgoMV8kdpVg5QY8Oh7HE7CxcOnHS3s6PXMP1SysyLPx+Zl9zp1EAaJkT/usfDu' +
-'RHdTyDvw9OVaITElH5JfywLvkxQdmDoLvLyEdGECgYBo1DfQ5LIjH1avYURF6k6t' +
-'JQ3HVxOhLqlrdYGsupt39KNGZA7d8VO6E1gN7Fs+J4OvvwISP03FTI9xX21eJC/k' +
-'lUhsaoapX0MnLlLV0Wpk3sMl45rSNUBC2TUwdYCoeh7zdVutiXNdgXzZGV3p83I9' +
-'OOy4IhKyQrAZtfUDg7jK0QKBgQC543hUOlYD24F8rQgNcVviIQzkrdQ9L1rnbr2J' +
-'9Si9qyTDvAbwqx2+G5/pVhxdvKaU0dtUYMG/C9BWddpw9grw1btRyhPaLSS4ZYxp' +
-'ky2i9oaO4Vv97CIgKeTOxD2i12oiFd9G5l+lHc/A7FIMLMSlvgCdjReW4OrLgeAZ' +
-'a8D+gQKBgECz+ul/jNjYiNZ5nl47z2hqITd2M6fwBdH42A2ovgS+9a8zH2AUWFYx' +
-'gvPCic2hujZtjZcNQ1RvAb7eG2I3WU3DXUIkNw4iJdLk9j258iPVV1K0rfm9PoTv' +
-'NsvtJ40tn/X0uefyiO0CJDJTCgQqJkDH80SpeQbIpaqBjkHZoNPD' +
-'-----END RSA PRIVATE KEY-----'
+    return '-----BEGIN RSA PRIVATE KEY-----\n' +
+'MIIEowIBAAKCAQEAzpPwCB6A+HXHTS0E83ujlcLf4Dlz0DTo53SsGkJCQ7BiMwxh\n' +
+'FHpuUN3yUFTEgtTXLN+pDK+WiFJgELKCKH0NDxFPnezDE0iwwDsszD+5KfT+mxPP\n' +
+'ZLHUZQ5OvJ5oGSlYmrFhjTLqhrZTR1aa0Ml8/PvWbvu4MUuSK9JWGoa4wV5Og5GE\n' +
+'Gy4U0ytP9MkDiDUOligAUA1QaHUyorUIG41x9Is7E4/1epFpETtwgi+4keZIBAI9\n' +
+'4Cojd7f7tJk8WpmR18wchng8qLZ1PHLhncK5DwrYLcsK7P5WfOwm7fhVJW0oRZM4\n' +
+'GaC8IHtUO79WphUYcQ5VGqDP1z+fURZNUNL+tQIDAQABAoIBABtZwO0CROcgiOux\n' +
+'6zblhsocTBHe6XOGndOPQf4UCbv2jXneyLeyYgq46A00u/PqhDa/wh0Y3mBcL7Xm\n' +
+'PI9pxyHYk+b/4vAZrrU04ICGa1ifxFn57HqThOCAXXJhsryqGb4ZgCX2uNBvMWV/\n' +
+'lO3Rz4ebPE/jaga0z7yXk6jdb3bCbdOXsj0iPfHAuTZMJaVg43Mgr3Xmm8ozKGD4\n' +
+'4Htd8oMsmX26lgI4kH1pLP/wZHhVZmW5CHphizijkAaioPmPOH1JKl6hLNZ8SPWx\n' +
+'Lc4i6CDoyXk2k/YRHcUjyPDt6F97b96xZNXnyHENKhshci1ES2Htmq/0VQBqzq/m\n' +
+'Cm5KrYECgYEA5pLj5bav0fX6+K3tta+weFEQBLczp+cSZ5KwL0HQhtttR1/lEszp\n' +
+'Gz689ffmPw2FpaNLGk12o+HMOboWLiJICjeUg7hEoU0OLiIcAqX+nE+ptcGqEEpk\n' +
+'NxGP1yBZVkAxVIupAe8q+/O3gf7BGjvVqmJxoGFro/FPqowAFNUuatUCgYEA5Vuk\n' +
+'RWpowEDNPYyfD18vRMB48VeWQJm6SGsO+5kkggiIaOESIA0GT1ttvPpq3D5Ag13A\n' +
+'moSgoMV8kdpVg5QY8Oh7HE7CxcOnHS3s6PXMP1SysyLPx+Zl9zp1EAaJkT/usfDu\n' +
+'RHdTyDvw9OVaITElH5JfywLvkxQdmDoLvLyEdGECgYBo1DfQ5LIjH1avYURF6k6t\n' +
+'JQ3HVxOhLqlrdYGsupt39KNGZA7d8VO6E1gN7Fs+J4OvvwISP03FTI9xX21eJC/k\n' +
+'lUhsaoapX0MnLlLV0Wpk3sMl45rSNUBC2TUwdYCoeh7zdVutiXNdgXzZGV3p83I9\n' +
+'OOy4IhKyQrAZtfUDg7jK0QKBgQC543hUOlYD24F8rQgNcVviIQzkrdQ9L1rnbr2J\n' +
+'9Si9qyTDvAbwqx2+G5/pVhxdvKaU0dtUYMG/C9BWddpw9grw1btRyhPaLSS4ZYxp\n' +
+'ky2i9oaO4Vv97CIgKeTOxD2i12oiFd9G5l+lHc/A7FIMLMSlvgCdjReW4OrLgeAZ\n' +
+'a8D+gQKBgECz+ul/jNjYiNZ5nl47z2hqITd2M6fwBdH42A2ovgS+9a8zH2AUWFYx\n' +
+'gvPCic2hujZtjZcNQ1RvAb7eG2I3WU3DXUIkNw4iJdLk9j258iPVV1K0rfm9PoTv\n' +
+'NsvtJ40tn/X0uefyiO0CJDJTCgQqJkDH80SpeQbIpaqBjkHZoNPD\n' +
+'-----END RSA PRIVATE KEY-----\n'
 };
 
 function get_identity_pub_key(id) {
