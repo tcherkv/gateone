@@ -1,5 +1,5 @@
-sudo fio --name=randwrite --ioengine=libaio --iodepth=1 --rw=randwrite --bs=4k --direct=0 --filename=/dev/vdb --size=15G --numjobs=4 --runtime=2400 --group_reporting
+sudo fio --name=randwrite --ioengine=libaio --iodepth=1 --rw=randwrite --bs=4k --direct=0 --filename=/dev/vdb --size=4G --numjobs=4 --runtime=2400 --group_reporting
 
-sudo fio --name=randread --ioengine=libaio --iodepth=16 --rw=randread --bs=4k --direct=0 --filename=/dev/vdb --size=15G --numjobs=4 --runtime=2400 --group_reporting
+sudo fio --name=randread --ioengine=libaio --iodepth=16 --rw=randread --bs=4k --direct=0 --filename=/dev/vdb --size=4G --numjobs=4 --runtime=2400 --group_reporting
 
 sudo fio --randrepeat=1 --ioengine=libaio --direct=1 --gtod_reduce=1 --name=test --filename=/dev/vdb --bs=4k --iodepth=64 --size=15G --readwrite=randrw --rwmixread=75
